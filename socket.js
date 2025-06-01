@@ -12,7 +12,7 @@ export const initializeSocket = (server) => {
     cors: process.env.FRONT_URL,
     methods: ["GET", "POST"],
     pingInterval: 25000,
-    pingTimeout: 25000,
+    pingTimeout: 20000,
   });
 
   // socket protect middleware
