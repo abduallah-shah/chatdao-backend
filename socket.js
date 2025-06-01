@@ -11,8 +11,8 @@ export const initializeSocket = (server) => {
   const io = new Server(server, {
     cors: process.env.FRONT_URL,
     methods: ["GET", "POST"],
-    pingInterval: 250000,
-    pingTimeout: 200000,
+    pingInterval: 250000000,
+    pingTimeout: 2000000000,
   });
 
   // socket protect middleware
