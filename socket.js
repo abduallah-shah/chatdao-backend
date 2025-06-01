@@ -13,15 +13,16 @@ export const initializeSocket = (server) => {
       origin: process.env.FRONT_URL || "https://chatdao.vercel.app",
       methods: ["GET", "POST", "OPTIONS"],
       credentials: true,
-      allowedHeaders: ["token", "Content-Type"]
+      allowedHeaders: ["token", "Content-Type", "Authorization"],
     },
-    path: "/socket.io",  // Removed trailing slash
-    transports: ['polling', 'websocket'],  // Try polling first
+    path: "/socket.io",
+    transports: ['polling'],  // Start with polling only
     pingInterval: 25000,
     pingTimeout: 20000,
     allowEIO3: true,
-    perMessageDeflate: false,  // Disable compression
-    maxHttpBufferSize: 1e8
+    perMessageDeflate: false,
+    maxHttpBufferSize: 1e8,
+    connectTimeout: 45000
   });
 
   // Add connection event logging
