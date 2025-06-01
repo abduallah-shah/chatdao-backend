@@ -11,22 +11,17 @@ export const initializeSocket = (server) => {
   const io = new Server(server, {
     cors: {
       origin: process.env.FRONT_URL || "https://chatdao.vercel.app",
-      methods: ["GET", "POST"],
+      methods: ["GET", "POST", "OPTIONS"],
       credentials: true,
-      allowedHeaders: ["token"]
+      allowedHeaders: ["token", "Content-Type"]
     },
-    path: "/socket.io/",
-    transports: ['websocket', 'polling'],
+    path: "/socket.io",  // Removed trailing slash
+    transports: ['polling', 'websocket'],  // Try polling first
     pingInterval: 25000,
     pingTimeout: 20000,
     allowEIO3: true,
-    cookie: {
-      name: "io",
-      path: "/",
-      httpOnly: true,
-      sameSite: "none",
-      secure: true
-    }
+    perMessageDeflate: false,  // Disable compression
+    maxHttpBufferSize: 1e8
   });
 
   // Add connection event logging
